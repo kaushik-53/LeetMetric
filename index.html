@@ -3,51 +3,128 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="LeetMetric – Instantly view any LeetCode user's problem-solving stats, progress rings, and submission counts." />
     <title>LeetMetric</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>LeetMetric</h1>
 
-      <div class="user-container">
-        <p>Enter your username below</p>
-        <div class="user-input-container">
+    <!-- ===== App Container ===== -->
+    <div class="container">
+
+      <!-- Header -->
+      <header class="app-header">
+        <div class="logo-wrapper">
+          <h1>LeetMetric</h1>
+        </div>
+        <p class="subtitle">Visualize your LeetCode journey at a glance</p>
+      </header>
+
+      <!-- Search Card -->
+      <section class="search-card" aria-label="User search">
+        <label class="search-label" for="user-input">LeetCode Username</label>
+        <div class="search-row">
           <input
             type="text"
-            placeholder="Enter your username"
             id="user-input"
+            placeholder="enter username"
+            autocomplete="off"
+            spellcheck="false"
+            maxlength="15"
           />
-          <button id="search-button">Search</button>
+          <button id="search-button" aria-label="Search user stats">
+            <div class="spinner" id="btn-spinner"></div>
+            <span id="btn-text">Search</span>
+          </button>
         </div>
-      </div>
+      </section>
 
-      <div class="stats-container">
-        <div class="progress">
-          <div class="progress-item">
-            <div class="easy-progress circle">
-              <span id="easy-label"> </span>
-              <p>Easy</p>
-            </div>
-          </div>
+      <!-- Stats (hidden until data loads) -->
+      <section class="stats-container" id="stats-container" aria-live="polite">
 
-          <div class="progress-item">
-            <div class="medium-progress circle">
-              <span id="medium-label"> </span>
-              <p>Medium</p>
-            </div>
-          </div>
-
-          <div class="progress-item">
-            <div class="hard-progress circle">
-              <span id="hard-label"> </span>
-              <p>Hard</p>
-            </div>
-          </div>
-
-          <div class="stats-card"></div>
+        <!-- Default empty state -->
+        <div class="state-message" id="empty-state">
+          <span class="state-icon">🔍</span>
+          <p class="state-title">No data yet</p>
+          <p>Enter a LeetCode username above to load stats.</p>
         </div>
-      </div>
+
+        <!-- Progress Rings Panel (shown after data) -->
+        <div class="progress-panel" id="progress-panel" hidden>
+          <div class="progress-panel-header">
+            <span class="section-label">Solved Problems</span>
+            <div class="total-solved-badge">
+              Total &nbsp;<strong id="total-solved-display">—</strong>
+            </div>
+          </div>
+
+          <div class="progress-rings">
+            <!-- Easy -->
+            <div class="ring-item">
+              <div class="ring-wrapper easy" id="ring-easy-wrapper">
+                <svg class="ring-svg" viewBox="0 0 110 110">
+                  <circle class="ring-track" cx="55" cy="55" r="45"
+                    stroke="rgba(0,184,163,0.12)" />
+                  <circle class="ring-progress" id="ring-easy" cx="55" cy="55" r="45"
+                    stroke="var(--easy)" />
+                </svg>
+                <div class="ring-center">
+                  <span class="ring-count" id="easy-label">—</span>
+                  <span class="ring-total" id="easy-total"></span>
+                </div>
+              </div>
+              <span class="ring-label easy">Easy</span>
+            </div>
+
+            <!-- Medium -->
+            <div class="ring-item">
+              <div class="ring-wrapper medium" id="ring-medium-wrapper">
+                <svg class="ring-svg" viewBox="0 0 110 110">
+                  <circle class="ring-track" cx="55" cy="55" r="45"
+                    stroke="rgba(245,158,11,0.12)" />
+                  <circle class="ring-progress" id="ring-medium" cx="55" cy="55" r="45"
+                    stroke="var(--medium)" />
+                </svg>
+                <div class="ring-center">
+                  <span class="ring-count" id="medium-label">—</span>
+                  <span class="ring-total" id="medium-total"></span>
+                </div>
+              </div>
+              <span class="ring-label medium">Medium</span>
+            </div>
+
+            <!-- Hard -->
+            <div class="ring-item">
+              <div class="ring-wrapper hard" id="ring-hard-wrapper">
+                <svg class="ring-svg" viewBox="0 0 110 110">
+                  <circle class="ring-track" cx="55" cy="55" r="45"
+                    stroke="rgba(239,68,68,0.12)" />
+                  <circle class="ring-progress" id="ring-hard" cx="55" cy="55" r="45"
+                    stroke="var(--hard)" />
+                </svg>
+                <div class="ring-center">
+                  <span class="ring-count" id="hard-label">—</span>
+                  <span class="ring-total" id="hard-total"></span>
+                </div>
+              </div>
+              <span class="ring-label hard">Hard</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submission Cards (shown after data) -->
+        <div id="cards-section" hidden>
+          <span class="section-label" style="display:block; margin-bottom:0.75rem;">Submission Counts</span>
+          <div class="cards-grid stats-card" id="stats-card-grid"></div>
+        </div>
+
+      </section>
+
+      <!-- Footer -->
+      <footer class="app-footer">
+        Data sourced from the LeetCode GraphQL API via cors-anywhere proxy.
+      </footer>
+
     </div>
 
     <script src="script.js"></script>
