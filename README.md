@@ -42,7 +42,7 @@ A modern browser (Chrome, Firefox, Edge, Safari) with JavaScript enabled. No ins
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/your-username/LeetMetric.git
+git clone [https://github.com/your-username/LeetMetric.git](https://github.com/kaushik-53/LeetMetric)
 
 # 2. Open the project folder
 cd LeetMetric
