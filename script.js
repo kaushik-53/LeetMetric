@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
       setLoading(true);
 
       const targetUrl = `https://leetcode.com/graphql/`;
-      const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
+      const proxyUrl = `https://corsproxy.io/?`;
       const myHeaders = new Headers();
       myHeaders.append("content-type", "application/json");
 

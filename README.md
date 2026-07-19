@@ -42,7 +42,7 @@ A modern browser (Chrome, Firefox, Edge, Safari) with JavaScript enabled. No ins
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/your-username/LeetMetric.git
+git clone https://github.com/kaushik-53/LeetMetric.git
 
 # 2. Open the project folder
 cd LeetMetric
@@ -93,11 +93,10 @@ The app queries the **LeetCode GraphQL endpoint** (`https://leetcode.com/graphql
 
 ## ⚠️ CORS Proxy Note
 
-LeetCode's API does not allow direct browser requests due to CORS restrictions. This app routes requests through **[cors-anywhere](https://cors-anywhere.herokuapp.com/)** as a temporary workaround.
+LeetCode's API does not allow direct browser requests due to CORS restrictions. This app routes requests through **[corsproxy.io](https://corsproxy.io/)** as a workaround.
 
 **Limitations:**
-- You may need to visit [cors-anywhere.herokuapp.com/corsdemo](https://cors-anywhere.herokuapp.com/corsdemo) and click **"Request temporary access"** before the first use.
-- The proxy is a public demo service and may have rate limits.
+- corsproxy.io is a free public proxy and may have rate limits under heavy traffic.
 - For production use, consider self-hosting a CORS proxy or building a small backend proxy.
 
 ---
