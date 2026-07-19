@@ -80,11 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
     try {
       setLoading(true);
 
-      const targetUrl = `https://leetcode.com/graphql/`;
-      const proxyUrl = `https://corsproxy.io/?`;
-      const myHeaders = new Headers();
-      myHeaders.append("content-type", "application/json");
-
       const graphql = JSON.stringify({
         query: `
           query userSessionProgress($username: String!) {
@@ -111,11 +106,11 @@ document.addEventListener("DOMContentLoaded", function () {
         variables: { username },
       });
 
-      const response = await fetch(proxyUrl + targetUrl, {
+      // Use the Vercel serverless proxy — no CORS issues in production or locally
+      const response = await fetch("/api/leetcode", {
         method: "POST",
-        headers: myHeaders,
+        headers: { "Content-Type": "application/json" },
         body: graphql,
-        redirect: "follow",
       });
 
       if (!response.ok) {
